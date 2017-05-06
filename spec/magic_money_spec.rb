@@ -6,4 +6,18 @@ describe MagicMoney do
       expect(MagicMoney.new(50, 'EUR')).to an_instance_of MagicMoney
     end
   end
+
+  describe '#amount' do
+    it 'set and get amount value' do
+      money = MagicMoney.new(50, 'EUR')
+      expect(money.amount).to eq 50
+    end
+  end
+
+  describe '#currency' do
+    it 'set and get currency value' do
+      money = MagicMoney.new(50, 'EUR')
+      expect(money.currency).to eq 'EUR'
+    end
+  end
 end

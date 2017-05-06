@@ -20,20 +20,10 @@ class MagicMoney
     MagicMoney.new(amount_in(new_currency), new_currency)
   end
 
-  def /(value)
-    "#{ @amount / parse_value(value) } #{ @currency }"
-  end
-
-  def *(value)
-    "#{ @amount * parse_value(value) } #{ @currency }"
-  end
-
-  def +(value)
-    "#{ @amount + parse_value(value) } #{ @currency }"
-  end
-
-  def -(value)
-    "#{ @amount - parse_value(value) } #{ @currency }"
+  [:/, :*, :+, :-].each do |operator|
+    define_method(operator) do |value|
+      "#{ @amount.send(operator, parse_value(value)) } #{ @currency }"
+    end
   end
 
   private

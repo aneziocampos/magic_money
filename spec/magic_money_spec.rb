@@ -24,10 +24,13 @@ describe MagicMoney do
   describe '#convert_to' do
     context 'with a valid currency' do
       let(:converted_money) { money.convert_to('USD') }
+      let(:usd_money) { MagicMoney.new(20, 'USD') }
 
       it { expect(converted_money).to an_instance_of MagicMoney }
       it { expect(converted_money.currency).to eq 'USD' }
       it { expect(converted_money.amount).to eq 55.5 }
+      it { expect(usd_money.convert_to('EUR').inspect).to eq '18.02 EUR' }
+      it { expect(usd_money.convert_to('Bitcoin').inspect).to eq '0.08 Bitcoin' }
     end
   end
 end

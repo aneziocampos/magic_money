@@ -1,7 +1,9 @@
 class MagicMoney
   attr_accessor :amount, :currency
 
-  RATES = { 'EUR' => { 'USD' => 1.11, 'Bitcoin' => 0.004 } }
+  RATES = { 'EUR' => { 'USD' => 1.11, 'Bitcoin' => 0.0047 },
+            'USD' => { 'EUR' => 0.9009, 'Bitcoin' => 0.0042 },
+            'Bitcoin' => { 'EUR' => 212.7659, 'USD' => 238.0952 } }
 
   def initialize(amount, currency)
     @amount = amount

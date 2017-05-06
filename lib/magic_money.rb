@@ -26,13 +26,25 @@ class MagicMoney
     end
   end
 
+  def ==(money)
+    @amount == money.convert_to(@currency).amount
+  end
+
+  def >(money)
+    @amount > money.convert_to(@currency).amount
+  end
+
+  def <(money)
+    @amount < money.convert_to(@currency).amount
+  end
+
   private
   def amount_as_money
     '%.2f' % @amount
   end
 
   def amount_in(new_currency)
-    (@amount.to_f * RATES[@currency][new_currency]).round(2)
+    new_currency == @currency ? @amount : (@amount.to_f * RATES[@currency][new_currency]).round(2)
   end
 
   def parse_operation_param(value)

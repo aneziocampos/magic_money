@@ -41,4 +41,14 @@ describe MagicMoney do
       it { expect{ money.convert_to('YEN') }.to raise_error(ArgumentError, 'Invalid currency') }
     end
   end
+
+  describe 'arithmetic operations' do
+    let(:eur_money) { MagicMoney.new(50, 'EUR') }
+    let(:usd_money) { MagicMoney.new(20, 'USD') }
+
+    it { expect(eur_money + usd_money).to eq '68.02 EUR' }
+    it { expect(eur_money - usd_money).to eq '31.98 EUR' }
+    it { expect(eur_money / 2).to eq '25 EUR' }
+    it { expect(usd_money * 3).to eq '60 USD' }
+  end
 end

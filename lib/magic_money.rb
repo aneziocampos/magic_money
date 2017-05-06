@@ -20,6 +20,24 @@ class MagicMoney
     MagicMoney.new(amount_in(new_currency), new_currency)
   end
 
+  def /(number)
+    "#{ @amount / number } #{ @currency }"
+  end
+
+  def *(number)
+    "#{ @amount * number } #{ @currency }"
+  end
+
+  def +(money)
+    converted_amount = money.convert_to(@currency).amount
+    "#{ @amount + converted_amount } #{ @currency }"
+  end
+
+  def -(money)
+    converted_amount = money.convert_to(@currency).amount
+    "#{ @amount - converted_amount } #{ @currency }"
+  end
+
   private
   def amount_as_money
     '%.2f' % @amount

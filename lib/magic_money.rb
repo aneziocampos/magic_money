@@ -20,22 +20,20 @@ class MagicMoney
     MagicMoney.new(amount_in(new_currency), new_currency)
   end
 
-  def /(number)
-    "#{ @amount / number } #{ @currency }"
+  def /(value)
+    "#{ @amount / parse_value(value) } #{ @currency }"
   end
 
-  def *(number)
-    "#{ @amount * number } #{ @currency }"
+  def *(value)
+    "#{ @amount * parse_value(value) } #{ @currency }"
   end
 
-  def +(money)
-    converted_amount = money.convert_to(@currency).amount
-    "#{ @amount + converted_amount } #{ @currency }"
+  def +(value)
+    "#{ @amount + parse_value(value) } #{ @currency }"
   end
 
-  def -(money)
-    converted_amount = money.convert_to(@currency).amount
-    "#{ @amount - converted_amount } #{ @currency }"
+  def -(value)
+    "#{ @amount - parse_value(value) } #{ @currency }"
   end
 
   private
@@ -45,6 +43,10 @@ class MagicMoney
 
   def amount_in(new_currency)
     (@amount.to_f * RATES[@currency][new_currency]).round(2)
+  end
+
+  def parse_value(value)
+    value.kind_of?(MagicMoney) ? value.convert_to(@currency).amount : value
   end
 
   def validate_currency(currency)

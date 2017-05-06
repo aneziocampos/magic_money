@@ -20,15 +20,10 @@ class MagicMoney
     MagicMoney.new(amount_in(new_currency), new_currency)
   end
 
-  [:/, :*, :+, :-].each do |operator|
+  [:/, :*, :+, :-, :==, :>, :<].each do |operator|
     define_method(operator) do |value|
-      "#{ @amount.send(operator, parse_operation_param(value)) } #{ @currency }"
-    end
-  end
-
-  [:==, :>, :<].each do |operator|
-    define_method(operator) do |value|
-      @amount.send(operator, parse_operation_param(value))
+      result = @amount.send(operator, parse_operation_param(value))
+      [true, false].include?(result) ? result : "#{ result } #{ @currency }"
     end
   end
 

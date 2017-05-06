@@ -50,5 +50,7 @@ describe MagicMoney do
     it { expect(eur_money - usd_money).to eq '31.98 EUR' }
     it { expect(eur_money / 2).to eq '25 EUR' }
     it { expect(usd_money * 3).to eq '60 USD' }
+    it { expect(eur_money + 2).to eq '52 EUR' } 
+    it { expect(eur_money / usd_money).to eq '2.774694783573807 EUR' }
   end
 end

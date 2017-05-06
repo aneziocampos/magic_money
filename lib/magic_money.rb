@@ -22,7 +22,7 @@ class MagicMoney
 
   [:/, :*, :+, :-].each do |operator|
     define_method(operator) do |value|
-      "#{ @amount.send(operator, parse_value(value)) } #{ @currency }"
+      "#{ @amount.send(operator, parse_operation_param(value)) } #{ @currency }"
     end
   end
 
@@ -35,7 +35,7 @@ class MagicMoney
     (@amount.to_f * RATES[@currency][new_currency]).round(2)
   end
 
-  def parse_value(value)
+  def parse_operation_param(value)
     value.kind_of?(MagicMoney) ? value.convert_to(@currency).amount : value
   end
 

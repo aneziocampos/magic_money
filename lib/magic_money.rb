@@ -7,4 +7,13 @@ class MagicMoney
     @amount = amount
     @currency = currency
   end
+
+  def inspect
+    "#{ amount_as_money } #{ @currency }"
+  end
+
+  private
+  def amount_as_money
+    '%.2f' % @amount
+  end
 end

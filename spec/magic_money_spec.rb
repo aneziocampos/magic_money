@@ -20,4 +20,11 @@ describe MagicMoney do
       expect(money.currency).to eq 'EUR'
     end
   end
+
+  describe '#inspect' do
+    it 'override method to return human information for the object' do
+      money = MagicMoney.new(50, 'EUR')
+      expect(money.inspect).to eq '50.00 EUR'
+    end
+  end
 end

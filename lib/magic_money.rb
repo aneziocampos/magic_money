@@ -1,0 +1,3 @@
+class MagicMoney
+  
+end

@@ -26,16 +26,10 @@ class MagicMoney
     end
   end
 
-  def ==(money)
-    @amount == money.convert_to(@currency).amount
-  end
-
-  def >(money)
-    @amount > money.convert_to(@currency).amount
-  end
-
-  def <(money)
-    @amount < money.convert_to(@currency).amount
+  [:==, :>, :<].each do |operator|
+    define_method(operator) do |value|
+      @amount.send(operator, parse_operation_param(value))
+    end
   end
 
   private

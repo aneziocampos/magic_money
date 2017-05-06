@@ -59,10 +59,10 @@ describe MagicMoney do
     let(:eur_money) { MagicMoney.new(50, 'EUR') }
     let(:eur_money_in_usd) { eur_money.convert_to('USD') }
 
-    it { expect(usd_money == MagicMoney.new(20, 'USD')).to be_truthy }
-    it { expect(usd_money == MagicMoney.new(30, 'USD')).to be_falsey }
-    it { expect(eur_money_in_usd == MagicMoney.new(50, 'EUR')).to be_truthy }
-    it { expect(usd_money > MagicMoney.new(5, 'USD')).to be_truthy }
-    it { expect(usd_money < eur_money).to be_truthy }
+    it { expect(usd_money == MagicMoney.new(20, 'USD')).to eq true }
+    it { expect(usd_money == MagicMoney.new(30, 'USD')).to eq false }
+    it { expect(eur_money_in_usd == MagicMoney.new(50, 'EUR')).to eq true }
+    it { expect(usd_money > MagicMoney.new(5, 'USD')).to eq true }
+    it { expect(usd_money < eur_money).to eq true }
   end
 end

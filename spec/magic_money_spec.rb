@@ -4,8 +4,12 @@ describe MagicMoney do
   let(:money) { MagicMoney.new(50, 'EUR') }
 
   describe '.initialize' do
-    it 'receive and set amount and currency as params' do
-      expect(MagicMoney.new(50, 'EUR')).to an_instance_of MagicMoney
+    context 'with valid currency' do
+      it { expect(MagicMoney.new(50, 'EUR')).to an_instance_of MagicMoney }
+    end
+
+    context 'with invalid currency' do
+      it { expect{ MagicMoney.new(50, 'YEN') }.to raise_error(ArgumentError, 'Invalid currency') }
     end
   end
 
@@ -31,6 +35,10 @@ describe MagicMoney do
       it { expect(converted_money.amount).to eq 55.5 }
       it { expect(usd_money.convert_to('EUR').inspect).to eq '18.02 EUR' }
       it { expect(usd_money.convert_to('Bitcoin').inspect).to eq '0.08 Bitcoin' }
+    end
+
+    context 'with an invalid currency' do
+      it { expect{ money.convert_to('YEN') }.to raise_error(ArgumentError, 'Invalid currency') }
     end
   end
 end
